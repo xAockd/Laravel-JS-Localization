@@ -8,8 +8,9 @@ class LaravelJsLocalizationServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app['localization.js'] = $this->app->share(function ($app) {
+        $this->app->singleton('localization.js', function ($app) {
             $generator = new Generators\LangJsGenerator($app['files']);
+            
             return new Commands\LangJsCommand($generator);
         });
 
